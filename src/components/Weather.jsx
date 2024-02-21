@@ -1,5 +1,5 @@
 import WeatherBox from "./WeatherBox";
-import Rain from "../assets/images/rain.jpg";
+import Rain from "../assets/images/sky.jpg";
 export default function Weather() {
   return (
     <main>

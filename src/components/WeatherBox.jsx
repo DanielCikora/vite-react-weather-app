@@ -47,10 +47,7 @@ export default function WeatherBox() {
       setWeatherData(response.data);
       setSelectedCity(city);
     } catch (error) {
-      console.error(
-        "Error fetching weather data!",
-        error
-      );
+      console.error("Error fetching weather data!", error);
     }
   };
   const handleKeyDown = (event) => {
@@ -71,23 +68,36 @@ export default function WeatherBox() {
     <>
       <div className='input-box'>
         <input
-        className="input-box__input"
+          name='city-input'
+          className='input-box__input'
           type='text'
-          value={city}
-          placeholder="Search city..."
-          onChange={(e) => setCity(e.target.value.toLocaleUpperCase())}
+          value={city.toUpperCase()}
+          placeholder='Search city...'
+          onChange={(e) => setCity(e.target.value)}
           onKeyDown={handleKeyDown}
         />
-        <button className="input-box__button" onClick={handleSetCity}>Set City</button>
+        <button className='input-box__button' onClick={handleSetCity}>
+          Set City
+        </button>
       </div>
       <div className='weather-box'>
-        <h2>Weather in {selectedCity}</h2>
+        <h2 className='title weather-title__h2'>
+          Weather in {selectedCity.toUpperCase()}
+        </h2>
         {weatherData && (
           <div>
-            <p>Temperature: {Math.round(weatherData.main.temp)}°C</p>
-            <p>Humidity: {weatherData.main.humidity}%</p>
-            <p>Weather Condition: {weatherData.weather[0].main}</p>
-            <FontAwesomeIcon icon={weatherIcons[weatherData.weather[0].main]} />
+            <p className='paragraph weather-paragraph'>
+              Temperature: {Math.round(weatherData.main.temp)}°C
+            </p>
+            <p className='paragraph weather-paragraph'>Humidity: {weatherData.main.humidity}%</p>
+            <p className='paragraph weather-paragraph'>
+              Weather Condition: {weatherData.weather[0].main}
+            </p>
+            <i className='weather-icon'>
+              <FontAwesomeIcon
+                icon={weatherIcons[weatherData.weather[0].main]}
+              />
+            </i>
           </div>
         )}
       </div>

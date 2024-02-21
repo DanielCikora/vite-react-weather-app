@@ -5,6 +5,7 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -317,7 +318,6 @@ template {
 
 html,
 body {
-  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
   font-family: "Open Sans", sans-serif;
 }
 
@@ -333,6 +333,10 @@ body {
 }
 
 .title {
+  color: white;
+}
+
+.paragraph {
   color: white;
 }
 
@@ -369,13 +373,16 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background: rgba(25, 25, 25, 0.2);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   box-shadow: 0 4px 30px #191919;
   backdrop-filter: blur(8px);
-  color: white;
   align-self: center;
   padding: 40px;
+}
+
+.weather-title__h2 {
+  font-weight: 500;
 }
 
 .input-box {
@@ -386,20 +393,42 @@ body {
 
 .input-box__input {
   line-height: 0;
-  padding: 16px;
+  padding: 12px;
   border-radius: 4px;
+}
+.input-box__input input:checked {
+  background: none;
 }
 
 .input-box__button {
   line-height: 0;
-  padding: 10px 30px;
+  padding: 0 20px;
   background-color: #adc4ce;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  position: relative;
+}
+.input-box__button *::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: purple;
+  height: 100px;
+  width: 100px;
 }
 .input-box__button:hover {
   background-color: #191919;
+  color: white;
+}
+
+.weather-paragraph {
+  margin: 16px 0;
+}
+
+.weather-icon {
+  font-size: 30px;
   color: white;
 }
 

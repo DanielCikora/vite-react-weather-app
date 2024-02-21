@@ -3,13 +3,15 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background: rgba($black, 0.20);
-  border-radius: 4px;
+  background: rgba($white, 0.20);
+  border-radius: 8px;
   box-shadow: 0 4px 30px $black;
   backdrop-filter: blur(8px);
-  color: $white;
   align-self: center;
   padding: 40px;
+}
+.weather-title__h2 {
+  font-weight: 500;
 }
 .input-box {
   display: flex;
@@ -18,18 +20,38 @@
 }
 .input-box__input {
   line-height: 0;
-  padding: 16px;
+  padding: 12px;
   border-radius: 4px;
+  input:checked {
+    background: none;
+  }
 }
 .input-box__button {
   line-height: 0;
-  padding: 10px 30px;
+  padding: 0 20px;
   background-color: $light-blue;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  position: relative;
+  *::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: purple;
+    height: 100px;
+    width: 100px;
+  }
   &:hover {
     background-color: $black;
     color: $white;
   }
+}
+.weather-paragraph {
+  margin: 16px 0;
+}
+.weather-icon {
+  font-size: 30px;
+  color: $white;
 }

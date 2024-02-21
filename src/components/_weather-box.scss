@@ -1,0 +1,35 @@
+.weather-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background: rgba($black, 0.20);
+  border-radius: 4px;
+  box-shadow: 0 4px 30px $black;
+  backdrop-filter: blur(8px);
+  color: $white;
+  align-self: center;
+  padding: 40px;
+}
+.input-box {
+  display: flex;
+  column-gap: 20px;
+  align-self: center;
+}
+.input-box__input {
+  line-height: 0;
+  padding: 16px;
+  border-radius: 4px;
+}
+.input-box__button {
+  line-height: 0;
+  padding: 10px 30px;
+  background-color: $light-blue;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $black;
+    color: $white;
+  }
+}

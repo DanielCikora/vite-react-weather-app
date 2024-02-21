@@ -1,0 +1,96 @@
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSun,
+  faCloudRain,
+  faSnowflake,
+  faCloud,
+  faBolt,
+  faWind,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
+export default function WeatherBox() {
+  const [weatherData, setWeatherData] = useState(null);
+  const [city, setCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const API_KEY = "0877c5fb64510e875f73b0314d385b71";
+  const UNITS = "metric";
+  useEffect(() => {
+    const fetchWeatherByLocation = async () => {
+      try {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { latitude, longitude } = position.coords;
+          const reverseGeocodingUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`;
+          const reverseGeocodingResponse = await axios.get(reverseGeocodingUrl);
+          let cityName = reverseGeocodingResponse.data[0].name;
+          if (cityName.includes(" City")) {
+            cityName = cityName.split(" City")[0];
+          }
+          setCity(cityName);
+          setSelectedCity(cityName);
+          const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=${UNITS}`;
+          const weatherResponse = await axios.get(weatherUrl);
+          setWeatherData(weatherResponse.data);
+        });
+      } catch (error) {
+        console.error("Error fetching weather data by location:", error);
+      }
+    };
+
+    fetchWeatherByLocation();
+  }, []);
+  const handleSetCity = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${UNITS}`
+      );
+      setWeatherData(response.data);
+      setSelectedCity(city);
+    } catch (error) {
+      console.error(
+        "Error fetching weather data!",
+        error
+      );
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSetCity();
+    }
+  };
+  const weatherIcons = {
+    Clear: faSun,
+    Rain: faCloudRain,
+    Snow: faSnowflake,
+    Clouds: faCloud,
+    Thunderstorm: faBolt,
+    Drizzle: faCloudRain,
+    Wind: faWind,
+  };
+  return (
+    <>
+      <div className='input-box'>
+        <input
+        className="input-box__input"
+          type='text'
+          value={city}
+          placeholder="Search city..."
+          onChange={(e) => setCity(e.target.value.toLocaleUpperCase())}
+          onKeyDown={handleKeyDown}
+        />
+        <button className="input-box__button" onClick={handleSetCity}>Set City</button>
+      </div>
+      <div className='weather-box'>
+        <h2>Weather in {selectedCity}</h2>
+        {weatherData && (
+          <div>
+            <p>Temperature: {Math.round(weatherData.main.temp)}°C</p>
+            <p>Humidity: {weatherData.main.humidity}%</p>
+            <p>Weather Condition: {weatherData.weather[0].main}</p>
+            <FontAwesomeIcon icon={weatherIcons[weatherData.weather[0].main]} />
+          </div>
+        )}
+      </div>
+    </>
+  );
+}

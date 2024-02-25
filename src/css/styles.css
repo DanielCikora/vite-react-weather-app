@@ -373,7 +373,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 30px #191919;
   backdrop-filter: blur(8px);
-  padding: 40px 40px 80px;
+  padding: 40px;
   margin: 0 auto;
 }
 
@@ -437,9 +437,6 @@ body {
   }
 }
 @media only screen and (max-width: 768px) {
-  .weather-box {
-    padding: 40px;
-  }
   .input-box {
     display: flex;
     flex-direction: column;
